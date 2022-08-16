@@ -1,0 +1,2 @@
+Django~=3.2.10
+pycosat==0.6.3

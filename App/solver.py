@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import pycosat
 from copy import copy, deepcopy
+import time
 
 m = 3
 n = 3
@@ -303,6 +304,7 @@ def check_duplicate_clause(neg_clauses,clause):
 
 def find_solution(cnf):
     total_iter = 0
+    start = time.time()
     while True:
         solution = pycosat.solve(cnf)
         total_iter += 1
@@ -312,6 +314,9 @@ def find_solution(cnf):
             if (check):
                 print(total_iter)
                 return A
+            end = time.time()
+            if (end - start > 120):
+                return ['time']
             neg_sol = generate_negations(A, solution)
             cnf.extend(neg_sol) #Negate Solution
         else:
@@ -388,11 +393,14 @@ def answer(request):
             default_count = 0
         cnf.extend(add_hints(playboard))
         if(not sol):
-            print('aaa')
             sol = find_solution(cnf)
         print(sol)
         if(not sol):
             res = "This Yin-Yang instance has no solution."
+            indicator = "F"
+        elif(sol[0] == 'time'):
+            sol = []
+            res = "Program exceeds 2 minutes limit"
             indicator = "F"
         else:
             res = "Solution found for this Yin-Yang instance."

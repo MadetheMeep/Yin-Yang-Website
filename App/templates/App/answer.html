@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'App/mystyle.css' %}"/>
+    <title>Yin-Yang Solver</title>
 </head>
 <body>
     <center><h1>Yin-Yang Solver</h1></center>
@@ -64,6 +65,8 @@
             {% endif %}
         </div>
     </div>
-    <center><button class="buildButton" onclick="window.location.href='http://madethemeep.pythonanywhere.com/'">Return</button></center>
+    <form action="/" method="get">
+        <center><input type="submit" class="buildButton" value="Return"></center>
+    </form>
 </body>
 </html>

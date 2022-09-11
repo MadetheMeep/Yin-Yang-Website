@@ -315,7 +315,7 @@ def find_solution(cnf):
                 print(total_iter)
                 return A
             end = time.time()
-            if (end - start > 120):
+            if (end - start > 25):
                 return ['time']
             neg_sol = generate_negations(A, solution)
             cnf.extend(neg_sol) #Negate Solution
@@ -400,7 +400,7 @@ def answer(request):
             indicator = "F"
         elif(sol[0] == 'time'):
             sol = []
-            res = "Program exceeds 2 minutes limit"
+            res = "Program exceeds 25 seconds limit"
             indicator = "F"
         else:
             res = "Solution found for this Yin-Yang instance."
